@@ -1,18 +1,23 @@
 package com.ict.di;
 
+import com.ict.di.classfile.Broadcast;
 import com.ict.di.classfile.Singer;
 import com.ict.di.classfile.Stage;
 
 public class DIMainJavaver {
 
 	public static void main(String[] args) {
-		// Singer¸¦ »ı¼ºÇØ¼­ ³ë·¡ÇÏ°Ô ¸¸µé¾îº¸¼¼¿ä.
-		Singer singer = new Singer(); // °¡¼ö¸¦ ÁÖ¼®Ã³¸®ÇØ¹ö¸®¸é ¹«´ë ÀÚÃ¼°¡ ¼º¸³µÇÁö ¾Ê´Â´Ù.
+		// Singerë¥¼ ìƒì„±í•´ì„œ ë…¸ë˜í•˜ê²Œ ë§Œë“¤ì–´ë³´ì„¸ìš”.
+		Singer singer = new Singer(); // ê°€ìˆ˜ë¥¼ ì£¼ì„ì²˜ë¦¬í•´ë²„ë¦¬ë©´ ë¬´ëŒ€ ìì²´ê°€ ì„±ë¦½ë˜ì§€ ì•ŠëŠ”ë‹¤.
 		singer.sing();
 		
-		// Stageµµ ¸¸µé¾î¼­ °ø¿¬À» ½ÃÄÑº¸¼¼¿ä.
-		Stage stage = new Stage(singer); // ¹«´ë´Â °¡¼ö¿¡ ÀÇÁ¸ÇÑ´Ù.
-		stage.perform(); // ¹«´ë´Â °¡¼ö¾øÀÌ Á¸ÀçÇÒ ¼ö ¾ø´Ù.
+		// Stageë„ ë§Œë“¤ì–´ì„œ ê³µì—°ì„ ì‹œì¼œë³´ì„¸ìš”.
+		Stage stage = new Stage(singer); // ë¬´ëŒ€ëŠ” ê°€ìˆ˜ì— ì˜ì¡´í•œë‹¤.
+		stage.perform(); // ë¬´ëŒ€ëŠ” ê°€ìˆ˜ì—†ì´ ì¡´ì¬í•  ìˆ˜ ì—†ë‹¤.
+		
+		// Broadcastë¥¼ ìƒì„±í•´ì„œ ë°©ì†¡ë¬´ëŒ€ë¥¼ ì†¡ì¶œí•´ë³´ê² ìŠµë‹ˆë‹¤.
+		Broadcast broadcast = new Broadcast(stage);
+		broadcast.broad();
 
 	}
 
