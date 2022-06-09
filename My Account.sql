@@ -21,6 +21,8 @@ commit;
 
 SELECT * FROM board_tbl;
 
+SELECT MIN(bno) FROM board_tbl;
+
 DELETE FROM board_tbl WHERE bno = 9;
 
 alter sequence board_num nocache;
@@ -28,3 +30,19 @@ alter sequence board_num nocache;
 UPDATE board_tbl SET title = '첫글', content = '첫번째 테스트', writer = '왜안되는거임?', updatedate = SYSDATE WHERE bno = 1;
 
 commit;
+
+insert into board_tbl (bno, title, content, writer)
+(select board_num.nextval, title, content, writer from board_tbl);
+
+commit;
+
+SELECT count(*) FROM board_tbl;
+
+SELECT
+/*+ INDEX_DESC(board_tbl pk_board) */
+rownum, rowid, board_tbl.* FROM board_tbl;
+
+select * from
+(select /*+ INDEX_DESC(board_tbl pk_board) */
+rownum rn, board_tbl.* from board_tbl where rownum <= (5*10))
+    where rn > (5-1)*10;

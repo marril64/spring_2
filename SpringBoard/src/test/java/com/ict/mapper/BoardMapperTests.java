@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ict.persistent.BoardVO;
+import com.ict.persistence.BoardVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -21,9 +21,9 @@ public class BoardMapperTests {
 	@Autowired
 	private BoardMapper mapper;
 	
-	//@Test
+	@Test
 	public void testGetList() {
-		log.info(mapper.getList());
+		//log.info(mapper.getList(8L));
 	}
 	
 	//@Test
@@ -51,11 +51,11 @@ public class BoardMapperTests {
 	//@Test
 	public void testDelete() {
 		
-		mapper.delete(8L);
+		mapper.delete(2L);
 		
 	}
 	
-	@Test
+	//@Test
 	public void testUpdate() {
 		
 		BoardVO vo = new BoardVO();

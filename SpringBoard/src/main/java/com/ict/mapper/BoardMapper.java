@@ -2,11 +2,12 @@ package com.ict.mapper;
 
 import java.util.List;
 
-import com.ict.persistent.BoardVO;
+import com.ict.persistence.BoardVO;
+import com.ict.persistence.Criteria;
 
 public interface BoardMapper {
 
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(Criteria cri);
 	
 	// insert구문 실행용으로 메서드를 선언합니다.
 	// VO내부에 적혀있는 정보를 이용해 insert를 합니다.
@@ -19,5 +20,8 @@ public interface BoardMapper {
 	
 	// update
 	public void update(BoardVO vo);
+	
+	//detail
+	public BoardVO getDetail(Long bno);
 	
 }

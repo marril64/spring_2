@@ -1,4 +1,4 @@
-package com.ict.persistent;
+package com.ict.persistence;
 
 import java.sql.Date;
 
