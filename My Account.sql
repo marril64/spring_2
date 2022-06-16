@@ -46,3 +46,24 @@ select * from
 (select /*+ INDEX_DESC(board_tbl pk_board) */
 rownum rn, board_tbl.* from board_tbl where rownum <= (5*10))
     where rn > (5-1)*10;
+
+SELECT * FROM board_tbl WHERE TITLE like '%'||'1µî'||'%';
+
+CREATE table reply_tbl(
+    rno number(10, 0),
+    bno number(10, 0) not null,
+    reply varchar2(1000) not null,
+    replyer varchar2(50) not null,
+    replyDate date default sysdate,
+    updateDate date default sysdate
+    );
+    
+create sequence reply_num;
+
+alter table reply_tbl add constraint pk_reply primary key(rno);
+
+alter table reply_tbl add constraint fk_reply foreign key (bno) references board_tbl(bno);
+
+commit;
+
+SELECT * FROM reply_tbl;

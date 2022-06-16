@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ict.persistence.BoardVO;
 import com.ict.persistence.Criteria;
+import com.ict.persistence.PageMaker;
+import com.ict.persistence.SearchCriteria;
 import com.ict.service.BoardService;
 
 // bean container에 넣어보세요.
@@ -29,9 +31,20 @@ public class BoardController {
 	// 포워딩해서 화면에 뿌려주면, 글번호, 제목, 글쓴이, 날짜, 수정날짜를 화면에 출력해줍니다.
 	@RequestMapping("/list")
 							 //@RequestParam의 defaultValue를 통해 값이 안들어올때 자동으로 배정할 값을 정할수있음
-	public String getBoardList(Criteria cri, Model model) {
+	public String getBoardList(SearchCriteria cri, Model model) {
+		if (cri.getPage() == 0) {
+			cri.setPage(1);
+		}
+		
 		// 글 전체 목록 가져오기
 		List<BoardVO> list = service.getList(cri);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalBoard(service.getBoardCount(cri));
+		System.out.println("전체 글 개수 : " + service.getBoardCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 		
 		// 바인딩
 		model.addAttribute("list", list);
@@ -78,9 +91,12 @@ public class BoardController {
 	
 	// 글삭제도 post방식으로 처리하도록 합니다.
 	@PostMapping("/delete")
-	public String deleteBoard(Long bno) {
+	public String deleteBoard(Long bno, Model model, SearchCriteria cri) {
 		// 삭제 후 리스트로 돌아갈 수 있도록 내부 로직을 만들어주시고,
 		// 디테일 페이지에 삭제 요청을 넣을 수 있는 폼을 만들어주세요.
+		model.addAttribute("page", cri.getPage());
+		model.addAttribute("searchType", cri.getSearchType());
+		model.addAttribute("keyword", cri.getKeyword());
 		service.delete(bno);
 		return "redirect:/board/list";
 	}
@@ -91,17 +107,23 @@ public class BoardController {
 		BoardVO board = service.getDetail(bno);
 		// 포워딩을 이용해 updateForm.jsp에 보내줍니다.
 		model.addAttribute("board", board);
+		
 		return "/updateForm";
 	}
 	
 	@PostMapping("/update")
-	public String updateBoard(BoardVO vo, Model model) {
+	public String updateBoard(BoardVO vo, Model model, SearchCriteria cri) {
 		service.update(vo);
 		
 		/*Long bno = vo.getBno();
 		BoardVO board = service.getDetail(bno);
 		
 		model.addAttribute("board", board);*/
-		return "redirect:/board/detail?bno=" + vo.getBno();
+		model.addAttribute("bno", vo.getBno());
+		model.addAttribute("page", cri.getPage());
+		model.addAttribute("searchType", cri.getSearchType());
+		model.addAttribute("keyword", cri.getKeyword());
+		return "redirect:/board/detail";
 	}
+	
 }

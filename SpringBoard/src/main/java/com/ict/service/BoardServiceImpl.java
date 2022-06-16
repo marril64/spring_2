@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ict.mapper.BoardMapper;
 import com.ict.persistence.BoardVO;
 import com.ict.persistence.Criteria;
+import com.ict.persistence.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -16,7 +17,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper mapper;
 	
 	@Override
-	public List<BoardVO> getList(Criteria cri) {
+	public List<BoardVO> getList(SearchCriteria cri) {
 		return mapper.getList(cri);
 	};
 	
@@ -38,6 +39,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO getDetail(Long bno) {
 		return mapper.getDetail(bno);
+	}
+	
+	@Override
+	public Long getBoardCount(SearchCriteria cri) {
+		return mapper.getBoardCount(cri);
 	}
 	
 	
