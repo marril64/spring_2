@@ -66,4 +66,8 @@ alter table reply_tbl add constraint fk_reply foreign key (bno) references board
 
 commit;
 
+alter sequence reply_num nocache;
+
 SELECT * FROM reply_tbl;
+
+commit;
