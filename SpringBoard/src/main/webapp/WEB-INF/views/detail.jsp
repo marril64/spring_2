@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/resources/resttest/modal.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
@@ -58,5 +59,59 @@
 	<!-- <form action="/board/list" method="get">
 		<input type="submit" value="목록으로 돌아가기">
 	</form> -->
+	
+	<ul id="replies">
+	
+	</ul>
+	
+	<div id="modDiv" style="display:none;">
+		<div class="modal-title"></div>
+		<div>
+			<input type="text" id="replyText">
+		</div>
+		<div>
+			<button type="button" id="replyModBtn">Modify</button>
+			<button type="button" id="replyDelBtn">Delete</button>
+			<button type="button" id="closeBtn">Close</button>
+		</div>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		let bno = ${board.bno};
+		
+		function getAllList() {
+			$.getJSON("/replies/all/" + bno, function(data) {
+				
+				let str = "";
+				
+				console.log(data.length);
+				
+				$(data).each(
+					function() {
+						console.log(this);
+						str += `<li data-rno='\${this.rno}' class='replyLi'>\${this.rno} \${this.replyer} \${this.reply}<button>수정/삭제</button></li>`;
+					});
+				$("#replies").html(str);
+			});
+		}
+		
+		getAllList();
+		
+		$("#replies").on("click", ".replyLi button", function() {
+			
+			let reply = $(this).parent();
+			let rno = reply.attr("data-rno");
+			let replytext = reply.text();
+			
+			$(".modal-title").html(rno);
+			$("#replyText").val(replytext);
+			$("#modDiv").show("slow");
+			
+		});
+	
+	</script>
+	<script src="/resources/resttest/delete.js"></script>
+	<script src="/resources/resttest/modify.js"></script>
 </body>
 </html>

@@ -146,7 +146,11 @@
 			$("#replyText").val(replytext);
 			$("#modDiv").show("slow");
 		});
+		
 	</script>
-	
+	<!-- // delete.js 내부에 코드를 모두 작성한 다음 link태그를 이용해 인식만 시켜주세요.
+	css파일의 경우는 link 태그의 href로 경로지정을, js파일인 경우는 script 태그의 src로 경로지정을 합니다. -->
+	<script src="/resources/resttest/delete.js"></script>
+	<script src="/resources/resttest/modify.js"></script>
 </body>
 </html>
