@@ -61,37 +61,30 @@
 	
 	<!-- 검색창 위치 -->
 	<select name="searchType">
-		<option value="n">
-			<c:out value="${cri.searchType == null ? 'selected' : ''}"/>
-			-
+		<option value="n" ${pageMaker.cri.searchType == null ? 'selected' : ''}>
+			none
 		</option>
-		<option value="t">
-			<c:out value="${cri.searchType == 't' ? 'selected' : ''}"/>
+		<option value="t" ${pageMaker.cri.searchType == 't' ? 'selected' : ''}>
 			제목
 		</option>
-		<option value="c">
-			<c:out value="${cri.searchType == 'c' ? 'selected' : ''}"/>
+		<option value="c" ${pageMaker.cri.searchType == 'c' ? 'selected' : ''}>
 			본문
 		</option>
-		<option value="w">
-			<c:out value="${cri.searchType == 'w' ? 'selected' : ''}"/>
+		<option value="w" ${pageMaker.cri.searchType == 'w' ? 'selected' : ''}>
 			작성자
 		</option>
-		<option value="tc">
-			<c:out value="${cri.searchType == 'tc' ? 'selected' : ''}"/>
+		<option value="tc" ${pageMaker.cri.searchType == 'tc' ? 'selected' : ''}>
 			제목 + 본문
 		</option>
-		<option value="cw">
-			<c:out value="${cri.searchType == 'cw' ? 'selected' : ''}"/>
+		<option value="cw" ${pageMaker.cri.searchType == 'cw' ? 'selected' : ''}>
 			본문 + 글쓴이
 		</option>
-		<option value="tcw">
-			<c:out value="${cri.searchType == 'tcw' ? 'selected' : ''}"/>
+		<option value="tcw" ${pageMaker.cri.searchType == 'tcw' ? 'selected' : ''}>
 			제목 + 본문 + 글쓴이
 		</option>
 	</select>
 	
-	<input type="text" name="keyword" id="keywordInput" value="${cri.keyword}">
+	<input type="text" name="keyword" id="keywordInput" value="${pageMaker.cri.keyword}">
 	<button id="searchBtn">검색</button>
 	${pageMaker}
 	
