@@ -25,7 +25,7 @@
 			<c:forEach var="board" items="${list}">
 				<tr>
 					<td>${board.bno}</td>
-					<td><a href="/board/detail?bno=${board.bno}&page=${pageMaker.cri.page}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title}</a></td>
+					<td><a href="/board/detail?bno=${board.bno}&page=${pageMaker.cri.page}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title}<span class="badge badge-danger">[5]</span></a></td>
 					<td>${board.writer}</td>
 					<td>${board.regDate}</td>
 					<td>${board.updateDate}</td>
