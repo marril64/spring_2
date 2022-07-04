@@ -71,3 +71,26 @@ alter sequence reply_num nocache;
 SELECT * FROM reply_tbl;
 
 commit;
+
+CREATE TABLE tbl_test1( col1 varchar(50));
+CREATE TABLE tbl_test2( col2 varchar(5));
+commit;
+
+select * from tbl_test1;
+select * from tbl_test2;
+
+-- 댓글 개수를 게시판 글에 표시
+alter table board_tbl add(replycount number default 0);
+
+-- 현재 엮인 댓글을 계산해서 replycount에 입력해주는 쿼리문
+update boatd_tbl set replycount = 
+    (select count(rno) from reply_tbl
+where reply_tbl.bno = board_tbl.bno);
+
+select * from board_tbl order by desc;
+
+select * from reply_tbl;
+
+select count(rno) from reply_tbl where reply_tbl.bno = 200000;
+
+commit;
